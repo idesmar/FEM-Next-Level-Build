@@ -1,4 +1,4 @@
-@use 'sass:map';
+@use 'sass:map'; // ? may be omitted ?
 @use 'sass:math'; // * new 
 // documentation: https://sass-lang.com/documentation/breaking-changes/slash-div
 
@@ -20,7 +20,7 @@ $colors: (
 
 // function for displaying colors as var(--color)
 @function color($color) {
-	// * add an error handler if $color not in colors map
+	// * might need an error handler if $color not in colors map
 	@return var(--#{$color});
 };
 
@@ -33,8 +33,7 @@ $hover-clr: color(magenta);
 .sr-only {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
-	-webkit-clip-path: inset(50%);
-	        clip-path: inset(50%);
+	clip-path: inset(50%);
 	height: 1px;
 	margin: -1px;
 	overflow: hidden;
