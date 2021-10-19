@@ -1,0 +1,94 @@
+@use 'sass:map';
+@use 'sass:math'; // * new 
+// documentation: https://sass-lang.com/documentation/breaking-changes/slash-div
+
+// colors map
+$colors: (
+	'violet': hsl(257, 40%, 49%), // reverts to hex when interpolated
+	'magenta': 'hsl(300, 69%, 71%)', // maintains format when interpolated
+	'white': 'hsl(0, 0%, 100%)'
+);
+// mixin to @include inside of :root { }
+@mixin all-colors {
+	@each $key, $color in $colors {
+		--#{$key}: #{$color};
+	}
+};
+:root {
+	@include all-colors();
+}
+
+// function for displaying colors as var(--color)
+@function color($color) {
+	// * add an error handler if $color not in colors map
+	@return var(--#{$color});
+};
+
+
+$hover-clr: color(magenta);
+
+
+
+// * https://make.wordpress.org/accessibility/handbook/markup/the-css-class-screen-reader-text/
+.sr-only {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	-webkit-clip-path: inset(50%);
+	        clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+@mixin open-sans {
+	font-family: 'Open Sans', sans-serif;
+}
+
+@mixin poppins {
+	font-family: 'Poppins', sans-serif;
+}
+
+@function rem($px) {
+	@return (math.div($px, 16)) * 1rem;
+}
+
+@function rem4($px1, $px2, $px3: $px1, $px4: $px2) {
+	@return math.div($px1, 16) * 1rem
+					math.div($px2, 16) * 1rem
+					math.div($px3, 16) * 1rem
+					math.div($px4, 16) * 1rem;
+}
+
+
+// fixed-px = known || base value
+@function ratio($px, $fixed-px: 750) {
+	@return math.div($px, $fixed-px) * 100vw;
+}
+
+
+// $desk-400: calc((750 + 1) / 16 * 1em);
+
+// https://sass-lang.com/documentation/variables#advanced-variable-functions
+// https://sass-lang.com/documentation/values/maps#using-maps
+// map: (
+// 	key1: value1,
+// 	key2: value2,
+// 	key3: value3
+// )
+$breakpoints: (
+	'mob-100': rem(500),
+	'desk-400': rem(calc(750 + 1)),
+	'desk-700':	rem(1400)
+);
+@mixin media($size) {
+	@media (min-width: map-get($breakpoints, $size)) {
+		@content;
+	}
+}
+
+// @debug writes on the console
+// @debug map-get($breakpoints, 'desk-400')
