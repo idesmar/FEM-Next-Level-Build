@@ -1,0 +1,176 @@
+@use 'root' as *;
+@use 'utility' as *;
+
+
+$drop-opacity: 0.4;
+$top-ellipsis: rem(34);
+$right-ellipsis: rem(24);
+
+.dash-seg {
+	position: relative;
+
+	.ellipsis {
+		position: absolute;
+		top: $top-ellipsis;
+		right: $right-ellipsis;
+		z-index: 99;
+		cursor: pointer;
+		
+		&:hover > path {
+			fill: #fff;
+		}
+
+		* {
+			pointer-events: none;
+		}
+
+		&.drop-zone-set {
+			opacity: $drop-opacity;
+		}
+	}
+}
+
+
+.card {
+	padding: rem4(28, 24);
+	background-color: color(card);
+	border-radius: 1rem;
+	position: relative;
+	cursor: pointer;
+
+	@include media(screen-200) {
+		padding: rem(30);
+	}
+
+	* {
+		pointer-events: none;
+	}
+
+	&:hover {
+		background-color: color(card-hover);
+	}
+
+	&::before {
+		@include above-element;
+		background-repeat: no-repeat;
+		background-position: top -10px right 14px;
+	}
+
+	&.drop-zone {
+		background-color: color(card);
+		opacity: $drop-opacity;
+
+		&::before {
+			background-color: inherit;
+			background-image: none;
+		}
+	}
+
+
+	.title {
+		margin-bottom: rem(7);
+
+		@include media(screen-200) {
+			margin-bottom: rem(26);
+		}
+	}
+
+	.current {
+		@include media(screen-200) {
+			margin-bottom: rem(8);
+		}
+	}
+	
+	.timeframe {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		
+		@include media(screen-200) {
+			display: block;
+		}
+	}
+
+}
+
+.card-option {
+	position: absolute;
+	top: calc(#{$top-ellipsis} - 1.5rem);
+	right: calc(#{$right-ellipsis} - 0.9rem);
+	z-index: 999;
+
+	min-width: 10rem;
+	padding: 0.8rem;
+	border-radius: 0.5em;
+	background-color: #480E12;
+	font-size: rem(14);
+	transform-origin: 90% 15%;
+	transform: scale(0);
+
+	// TODO try using scale with origin on top right
+	// animation-name: appear-scale;
+	// animation-duration: 0.3s;
+	// animation-timing-function: ease-in;
+	// animation-fill-mode: forwards;
+	animation: appear-scale 0.3s ease-in forwards;
+	@keyframes appear-scale {
+		100% { 
+			transform: scale(1);
+		}
+	}
+	
+	&.close-anim {		
+		transform: scale(1);
+		animation: disappear-scale 0.3s ease-out forwards;
+		@keyframes disappear-scale {
+			100% { 
+				transform: scale(0);
+			}
+		}
+	}
+
+
+	li {
+		padding: 0.2rem;
+		cursor: pointer;
+		border-radius: 0.2em;
+
+		&:hover {
+			background-color: #777586;
+			color: #480E12;
+		}
+	}
+
+	.close-icon {
+		display: block;
+		margin-left: auto;
+		cursor: pointer;
+		
+		* { pointer-events: none; }
+	}
+}
+
+.work::before {
+	background-color: color(work);
+	background-image: url('../../app/images/icon-work.svg');
+}
+.play::before {
+	background-color: color(play);
+	background-image: url('../../app/images/icon-play.svg');
+}
+.study::before {
+	background-color: color(study);
+	background-image: url('../../app/images/icon-study.svg');		
+}
+.exercise::before {
+	background-color: color(exercise);
+	background-image: url('../../app/images/icon-exercise.svg');
+}
+.social::before {
+	background-color: color(social);
+	background-image: url('../../app/images/icon-social.svg');
+}
+.self-care::before {		
+	background-color: color(self-care);
+	background-image: url('../../app/images/icon-self-care.svg');
+}

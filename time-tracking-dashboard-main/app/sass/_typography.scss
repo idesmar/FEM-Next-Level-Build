@@ -1,0 +1,76 @@
+@use 'root' as *;
+@use 'utility' as *;
+
+body {
+	color: color(font);
+}
+
+header {
+
+	.profile-header {	
+		font-weight: 400;
+
+		&-intro {
+			font-size: rem(15);
+		}
+		&-name {
+			font-weight: 300;
+			font-size: rem(24);
+
+			@include media(screen-200) {
+				font-size: rem(40);
+				line-height: 1.185;
+			}
+		}
+	}
+	
+	.reports {
+		font-size: rem(18);
+		font-weight: 400;
+		color: color(reports);
+	}
+
+	.report {
+
+		&:hover, &.selected {
+			color: #fff;
+		}
+	}
+}
+
+
+.dash	{
+
+	.card {
+		.title {
+			font-size: rem(18);
+			font-weight: 500;
+		}
+		
+		.current {
+			font-size: rem(32);
+			font-weight: 300;
+
+
+			@include media(screen-200) {
+				font-size: rem(55);
+			}
+		}
+		
+		.previous {
+			font-size: rem(16);
+			font-weight: 400;
+			letter-spacing: -0.03em;
+			color: color(previous);
+		}
+	}
+}
+
+.attribution {
+	font-size: rem(14);
+	text-align: center;
+	
+	a {
+		color: hsl(43, 74%, 49%);
+	}
+}

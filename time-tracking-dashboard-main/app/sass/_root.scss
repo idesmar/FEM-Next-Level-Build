@@ -1,0 +1,80 @@
+@use 'utility' as *;
+
+// colors map
+$colors: (
+	/* - enclosing color code in '' will prevent conversion
+			 to hex code when interpolated
+		 - may prevent color manipulation by custom function? */
+	'default': #1a1a1a,
+	'work': 'hsl(15, 100%, 70%)',
+	'play': 'hsl(195, 74%, 62%)',
+	'study': 'hsl(348, 100%, 68%)',
+	'exercise': 'hsl(145, 58%, 55%)',
+	'social': 'hsl(264, 64%, 52%)',
+	'self-care': 'hsl(43, 84%, 65%)',
+	'font': 'hsl(0, 0%, 100%)',
+	'card': 'hsl(235, 46%, 20%)', // dark blue
+	'card-hover': hsl(236, 41%, 34%), // custom from color picker
+	'profile': 'hsl(246, 80%, 60%)', // blue
+	'reports': 'hsl(235, 45%, 61%)', // de-saturated blue
+	'previous': 'hsl(236, 100%, 87%)', // pale blue
+	'body': 'hsl(226, 43%, 10%)' // very dark blue
+);
+// mixin to @include inside of :root { }
+@mixin all-colors {
+	@each $key, $color in $colors {
+		--#{$key}: #{$color};
+	}
+};
+
+// displaying colors as var(--color)
+@function color($color) {
+	@return var(--#{$color});
+};
+
+:root {
+	@include all-colors();
+	box-sizing: border-box;
+	font-family: 'Rubik', sans-serif;
+}
+
+li {
+	list-style: none;
+}
+
+*, *::before, *::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: inherit;
+}
+
+.sr-only {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+@mixin above-element {
+	position: absolute;
+	content: '';
+	top: rem(-38);
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	border-radius: inherit;
+	pointer-events: none;
+
+	@include media(screen-200) {
+		top: rem(-45);
+	}
+}
+
+$min-card-width: rem(255); // TODO delete after

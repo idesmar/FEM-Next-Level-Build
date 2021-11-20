@@ -1,0 +1,39 @@
+@use 'sass:map'; // ? may be omitted ?
+@use 'sass:math'; // * update: https://sass-lang.com/documentation/breaking-changes/slash-div
+
+
+@function rem($px) {
+	@return (math.div($px, 16)) * 1rem;
+}
+
+@function rem4($px1, $px2, $px3: $px1, $px4: $px2) {
+	@return math.div($px1, 16) * 1rem
+					math.div($px2, 16) * 1rem
+					math.div($px3, 16) * 1rem
+					math.div($px4, 16) * 1rem;
+}
+
+
+// fixed-px = known || base value
+@function ratio($px, $fixed-px: 750) {
+	@return math.div($px, $fixed-px) * 100vw;
+}
+
+
+@function em($px) {
+	@return (math.div($px, 16)) * 1em;
+}
+$breakpoints: (
+	'screen-200': em(700),
+	'screen-400': em(900),
+	'screen-600':	em(1200)
+);
+@mixin media($size) {
+	@media (min-width: map-get($breakpoints, $size)) {
+		@content;
+	}
+}
+
+@mixin debug-css {
+	outline: 1px solid yellow;
+}

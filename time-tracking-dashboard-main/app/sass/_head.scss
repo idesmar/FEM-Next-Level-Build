@@ -1,0 +1,87 @@
+@use 'root' as *;
+@use 'utility' as *;
+
+$corner: rem(16);
+
+.profile {
+	display: flex;
+	align-items: center;
+	gap: rem(20);
+	padding: rem4(35, 41, 35, 32);
+	background-color: color(profile);
+	border-radius: $corner;
+	position: relative;
+
+	@include media(screen-200) {
+		display: block;
+		padding-top: 0;
+		
+		&::before {
+			@include above-element;
+			background-color: inherit;
+		}
+	}
+
+	// * adjust profile 8px above y-axis
+	@include media(screen-200) {
+		margin-top: rem(-8);
+
+		&::before {
+			top: calc(#{rem(-45)} + #{rem(8)}); 
+		}
+	}
+
+	&-photo {
+		$diam: rem(64);
+		width: $diam;
+		height: $diam;
+		border-radius: 50%;
+		outline: rem(3) solid #fff;
+		
+		@include media(screen-200) {
+			$diam: rem(78);
+			width: $diam;
+			height: $diam;
+			margin-bottom: rem(43);
+		}
+	}
+
+	&-header {
+		
+		* {
+			display: block;
+		}
+		
+		&-intro {
+			margin-bottom: rem(4);
+			opacity: 0.85;
+		}
+	}
+}
+
+
+.reports {
+	display: flex;
+	justify-content: space-between;
+	padding: rem4(23, 32, 25);
+	background-color: color(card);
+	border-radius: $corner;
+	position: relative;
+
+	&::before {
+		@include above-element;
+		background-color: inherit;
+	}
+	
+	@include media(screen-200) {
+		// display: block;
+		flex-direction: column;
+		gap: rem(21);
+		padding: rem4(26, 32, 33);
+	}
+
+	.report {
+		width: fit-content;
+		cursor: pointer;
+	}
+}
