@@ -152,25 +152,25 @@ $right-ellipsis: rem(24);
 
 .work::before {
 	background-color: color(work);
-	background-image: url('../../app/images/icon-work.svg');
+	background-image: url('../images/icon-work.svg');
 }
 .play::before {
 	background-color: color(play);
-	background-image: url('../../app/images/icon-play.svg');
+	background-image: url('../images/icon-play.svg');
 }
 .study::before {
 	background-color: color(study);
-	background-image: url('../../app/images/icon-study.svg');		
+	background-image: url('../images/icon-study.svg');		
 }
 .exercise::before {
 	background-color: color(exercise);
-	background-image: url('../../app/images/icon-exercise.svg');
+	background-image: url('../images/icon-exercise.svg');
 }
 .social::before {
 	background-color: color(social);
-	background-image: url('../../app/images/icon-social.svg');
+	background-image: url('../images/icon-social.svg');
 }
 .self-care::before {		
 	background-color: color(self-care);
-	background-image: url('../../app/images/icon-self-care.svg');
+	background-image: url('../images/icon-self-care.svg');
 }

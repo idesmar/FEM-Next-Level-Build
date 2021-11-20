@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "arca",
   "license": "ISC",
   "devDependencies": {
     "del": "^6.0.0",
