@@ -46,6 +46,8 @@ function initializeRequest(report) {
 }
 
 function populateCards(userData, report) {
+  let msgForPreviousReport = getMsgForPreviousReport(report)
+ 
   cards.forEach(card => {
     let title = card.firstElementChild.innerText
     let userCategory = userData.find(category => category.title === title)
@@ -54,8 +56,21 @@ function populateCards(userData, report) {
 
     card.lastElementChild.innerHTML =
     `
-    <li class='current'>${reportData.current} hrs</li>
-    <li class='previous'>${reportData.previous} hrs</li>
+    <li class='current'>${reportData.current}hrs</li>
+    <li class='previous'>${msgForPreviousReport} - ${reportData.previous}hrs</li>
     `
   })
+}
+
+function getMsgForPreviousReport(report) {
+  switch (report) {
+    case 'daily':
+      return 'Yesterday'
+    case 'weekly':
+      return 'Last Week'
+    case 'monthly':
+      return 'Last Month'
+    default:
+      return 'error'
+  }
 }
