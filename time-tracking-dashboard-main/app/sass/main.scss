@@ -20,7 +20,6 @@ body {
 	flex-direction: column;
 	align-items: center;
 	width: rem(400);
-	z-index: 1; // * in case of css injection from browser extension and the likes
 	
 	@include media(screen-200) {
 		width: unset;
@@ -33,7 +32,7 @@ body {
 		grid-template-columns: 1fr 2fr;
 	}
 	@include media(screen-600) {
-		grid-template-columns: 1fr 3fr;
+		grid-template-columns: auto auto;
 	}
 }
 
@@ -42,13 +41,13 @@ header, .dash {
 }
 
 header, .dash-seg {
-	// z-index: 1;
 
 	@include media(screen-200) {
 		max-width: rem(355);
 	}
 	@include media(screen-600) {
 		min-width: rem(255);
+		max-width: rem(255);
 	}
 }
 
